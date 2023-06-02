@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FairzGame</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .container {
+      text-align: center;
+    }
+
+    .box-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: grey;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<br />
+<div class="container">
+  <h1>Coba tebak😏</h2>
+  <h2 id="level">Level: 1</h2>
+  <div class="box-container">
+    <div class="box" onclick="openBox(0)"></div>
+    <div class="box" onclick="openBox(1)"></div>
+    <div class="box" onclick="openBox(2)"></div>
+  </div>
+  <div id="game-message"></div>
+  <button id="kembali" class="btn btn-primary">Kembali</button>
+</div>
+<script>
+var level = 1;
+var totalLevels = 10;
+var boxes = [
+  { content: '', isOpen: false },
+  { content: '', isOpen: false },
+  { content: '', isOpen: false }
+];
+var bombs = 2;
+var stars = 1;
+var gameMessage = document.getElementById('game-message');
+var levelElement = document.getElementById('level');
+
+function startGame() {
+  level = 1;
+  updateLevelText();
+  resetBoxes();
+  generateBoxes();
+  gameMessage.textContent = '';
+}
+
+function resetBoxes() {
+  boxes.forEach(function (box) {
+    box.content = '';
+    box.isOpen = false;
+  });
+}
+
+function generateBoxes() {
+  var randomIndex = Math.floor(Math.random() * 3);
+  boxes[randomIndex].content = 'bom';
+  var remainingIndex = [0, 1, 2].filter(function (index) {
+    return index !== randomIndex;
+  });
+  boxes[remainingIndex[0]].content = 'hijau';
+  boxes[remainingIndex[1]].content = 'hijau';
+}
+
+function openBox(index) {
+  var box = boxes[index];
+  var boxElement = document.getElementsByClassName('box')[index];
+  if (!box.isOpen) {
+    boxElement.style.backgroundColor = '';
+
+    setTimeout(function () {
+      boxElement.style.backgroundColor = box.content === 'bom' ? 'red' : 'green';
+
+      setTimeout(function () {
+        boxElement.classList.add('open');
+
+        if (box.content === 'bom') {
+          gameMessage.textContent = 'Anda kalah!';
+          resetBoxColors();
+          setTimeout(function() {
+            restartGame();
+          }, 3000);
+        } else if (box.content === 'hijau') {
+          if (level === totalLevels) {
+            gameMessage.textContent = 'Anda menang! Selamat!';
+            resetBoxColors();
+          } else {
+            level++;
+            updateLevelText();
+            resetBoxes();
+            generateBoxes();
+            resetBoxColors();
+          }
+        }
+      }, 2000);
+    }, 500);
+  }
+}
+
+function resetBoxColors() {
+  var boxElements = document.getElementsByClassName('box');
+  for (var i = 0; i < boxElements.length; i++) {
+    boxElements[i].classList.remove('open');
+    boxElements[i].classList.remove('bom');
+    boxElements[i].classList.remove('hijau');
+    boxElements[i].style.backgroundColor = 'grey';
+  }
+}
+
+function restartGame() {
+  level = 1;
+  gameMessage.textContent = '';
+  resetBoxes();
+  generateBoxes();
+  updateLevelText();
+  resetBoxColors();
+}
+
+function updateLevelText() {
+  levelElement.textContent = 'Level: ' + level;
+}
+
+  document.getElementById("kembali").addEventListener("click", function() {
+  window.location.href = "index.html";
+});
+startGame();
+</script>
+</body>
+</html>

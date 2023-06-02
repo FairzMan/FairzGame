@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FairzGame</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    .cell {
+      border: 1px solid black;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Perubahan untuk tampilan seluler */
+    @media (max-width: 480px) {
+      .board {
+        width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <br />
+  <h1>Main bersama teman😬</h1>
+  <br />
+  <div class="container">
+    <div class="board">
+      <div class="cell" data-index="0" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="1" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="2" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="3" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="4" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="5" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="6" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="7" onclick="handleMove(this)"></div>
+      <div class="cell" data-index="8" onclick="handleMove(this)"></div>
+    </div>
+  </div>
+  <br />
+  <div class="container">
+    <h2>Skor:</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Pemain X: <span id="scoreX">0</span></h4>
+      </div>
+      <div class="col-md-6">
+        <h4>Pemain O: <span id="scoreO">0</span></h4>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div id="announcement"></div>
+  <br />
+  <button class="btn btn-primary" onclick="resetGame()">Reset Game</button>
+  <button id="kembali" class="btn btn-secondary">Kembali</button>
+  <script>
+    var currentPlayer = 'X';
+    var board = ['', '', '', '', '', '', '', '', ''];
+    var scoreX = 0;
+    var scoreO = 0;
+
+    function handleMove(cell) {
+      var cellIndex = cell.getAttribute('data-index');
+
+      if (board[cellIndex] === '') {
+        board[cellIndex] = currentPlayer;
+        cell.textContent = currentPlayer;
+
+        if (checkWin()) {
+          var announcement = document.getElementById('announcement');
+          announcement.textContent = 'Selamat! Pemain ' + currentPlayer + ' menang!';
+          updateScore();
+          resetGame();
+        } else if (checkDraw()) {
+          var announcement = document.getElementById('announcement');
+          announcement.textContent = 'Permainan berakhir dengan hasil seri!';
+          resetGame();
+        } else {
+          currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+      }
+    }
+
+    function checkWin() {
+      var winningCombinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // baris
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // kolom
+        [0, 4, 8], [2, 4, 6] // diagonal
+      ];
+
+      for (var i = 0; i < winningCombinations.length; i++) {
+        var [a, b, c] = winningCombinations[i];
+
+        if (
+          board[a] !== '' &&
+          board[a] === board[b] &&
+          board[a] === board[c]
+        ) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkDraw() {
+      return board.every(function(cell) {
+        return cell !== '';
+      });
+    }
+
+    function resetGame() {
+      currentPlayer = 'X';
+      board = ['', '', '', '', '', '', '', '', ''];
+      var cells = document.getElementsByClassName('cell');
+      Array.from(cells).forEach(function(cell) {
+        cell.textContent = '';
+      });
+    }
+
+    function updateScore() {
+      if (currentPlayer === 'X') {
+        scoreX++;
+        document.getElementById('scoreX').textContent = scoreX;
+      } else {
+        scoreO++;
+        document.getElementById('scoreO').textContent = scoreO;
+      }
+    }
+    
+      document.getElementById("kembali").addEventListener("click", function() {
+  window.location.href = "index.html";
+});
+  </script>
+</body>
+</html>
+

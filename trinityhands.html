@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FairzGame</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .score-board {
+      margin-bottom: 20px;
+    }
+
+    .score {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .result {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ayo main!</h1>
+    <div class="score-board">
+      <div class="score" id="playerScore">Kamu: 0</div>
+      <div class="score" id="computerScore">Fairz: 0</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary choice-button" onclick="getPlayerChoice('gunting')">Gunting</button>
+      <button class="btn btn-primary choice-button" onclick="getPlayerChoice('batu')">Batu</button>
+      <button class="btn btn-primary choice-button" onclick="getPlayerChoice('kertas')">Kertas</button>
+    </div>
+    <div class="mt-2">
+    <button class="btn btn-success" id="startButton" onclick="playGame()">Mulai</button>
+    <button class="btn btn-danger" onclick="resetGame()">Reset</button>
+    <p class="result" id="resultMessage"></p>
+    <button id="kembali" class="btn btn-secondary">Kembali</button>
+    </div>
+  </div>
+  <script>
+    var playerScore = 0;
+    var computerScore = 0;
+    var playerChoice = '';
+
+    function getPlayerChoice(choice) {
+      playerChoice = choice;
+      document.getElementById('resultMessage').textContent = '';
+    }
+
+    function getComputerChoice() {
+      var choices = ['gunting', 'batu', 'kertas'];
+      var randomIndex = Math.floor(Math.random() * choices.length);
+      return choices[randomIndex];
+    }
+
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return 'Hasilnya adalah seri!';
+      }
+
+      if (
+        (playerChoice === 'gunting' && computerChoice === 'kertas') ||
+        (playerChoice === 'batu' && computerChoice === 'gunting') ||
+        (playerChoice === 'kertas' && computerChoice === 'batu')
+      ) {
+        return 'Kamu menang!';
+      } else {
+        return 'Kamu kalah!';
+      }
+    }
+
+    function playGame() {
+      if (playerChoice === '') {
+        document.getElementById('resultMessage').textContent = 'Pilih dulu: gunting, batu, atau kertas.';
+        return;
+      }
+
+      var computerChoice = getComputerChoice();
+      var result = determineWinner(playerChoice, computerChoice);
+      displayResult(result);
+      updateScore(result);
+
+      if (playerScore >= 25 || computerScore >= 25) {
+        endGame();
+      }
+    }
+
+    function displayResult(result) {
+      document.getElementById('resultMessage').textContent = result;
+    }
+
+    function updateScore(result) {
+      if (result === 'Kamu menang!') {
+        playerScore++;
+      } else if (result === 'Kamu kalah!') {
+        computerScore++;
+      }
+
+      document.getElementById('playerScore').textContent = 'Kamu: ' + playerScore;
+      document.getElementById('computerScore').textContent = 'Fairuz: ' + computerScore;
+    }
+
+    function endGame() {
+      var winner = '';
+      if (playerScore >= 25 && computerScore < 25) {
+        winner = 'Kamu';
+      } else if (playerScore < 25 && computerScore >= 25) {
+        winner = 'Fairuz';
+      } else {
+        winner = 'Tidak ada pemenang!';
+      }
+      document.getElementById('resultMessage').textContent = 'Permainan berakhir! Pemenangnya adalah ' + winner + '.';
+      disableButtons();
+      disableStartButton();
+    }
+
+    function disableButtons() {
+      var buttons = document.getElementsByClassName('choice-button');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+      }
+    }
+
+    function disableStartButton() {
+      document.getElementById('startButton').disabled = true;
+    }
+
+  function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    playerChoice = '';
+    document.getElementById('playerScore').textContent = 'Kamu: ' + playerScore;
+    document.getElementById('computerScore').textContent = 'Fairuz: ' + computerScore;
+    document.getElementById('resultMessage').textContent = '';
+    enableButtons();
+    enableStartButton();
+  }
+
+  function enableButtons() {
+    var buttons = document.getElementsByClassName('choice-button');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = false;
+    }
+  }
+
+  function enableStartButton() {
+    document.getElementById('startButton').disabled = false;
+  }
+  
+    document.getElementById("kembali").addEventListener("click", function() {
+  window.location.href = "index.html";
+});
+</script>
+</body>
+</html>

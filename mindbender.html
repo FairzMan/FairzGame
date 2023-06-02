@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FairzGame</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .container {
+      max-width: 400px;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Tebak angka dipikiranku😏</h1><br />
+    <div class="form-group">
+      <label for="guessInput">Dari angka 1 - 50:</label>
+      <input type="number" id="guessInput" class="form-control" min="1" max="50">
+    </div>
+    <button id="guessButton" class="btn btn-primary">Bener gak</button>
+    <p class="result mt-3" id="resultMessage"></p>
+    <button id="resetButton" class="btn btn-secondary">Ulang</button>
+              <button id="kembali" class="btn btn-secondary">Kembali</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

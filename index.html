@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FairzGame</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <style>
+    .modal-center {
+      height:100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mt-5 {
+      padding-top: 27px;
+    }
+  </style>
+</head>
+<body>
+
+<!--navbar-->
+<nav class="navbar fixed-top bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">FairzGame</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Game
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" onclick="showModal('Hunt for Jade')">Hunt for jade</a></li>
+            <li><a class="dropdown-item" onclick="showModal('Mind Bender')">Mind Bender</a></li>
+            <li><a class="dropdown-item" onclick="showModal('Trinity Hands')">Trinity Hands</a></li>
+            <li><a class="dropdown-item" onclick="showModal('XO Showdown')">XO Showdown</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Social Media
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="mailto:fitrahfairuz03@gmail.com">Email</a></li>
+            <li><a class="dropdown-item" href="https://instagram.com/ffairrzzz">Instagram</a></li>
+          </ul>
+        </li><br />
+        <li class="nav-item">
+          <a class="nav-link disabled">v1.0</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--navbar end-->
+
+<div class="mt-5">
+<div class="px-3">
+  <!--pembungkus carousel dan content-->
+
+  <!--carousel-->
+  <div>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="hunt.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="mind.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="trinity.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="xo.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!--carousel end-->
+
+  <!--content-->
+  <div class="mt-3">
+    <div class="row">
+      <div class="card col-sm-6">
+        <h5 class="card-header">SinglePlayer</h5>
+        <div class="card-body">
+          <h5 class="card-title">Hunt for Jade</h5>
+          <img src="hunt.jpg" class="img-thumbnail" alt="...">
+          <p class="card-text">Temukan kotak yang berwarna hijau.</p>
+          <button class="btn btn-outline-success" onclick="showModal('Hunt for Jade')">Main</button>
+          <div id="modal-hunt-for-jade" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-center" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Hunt for Jade</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Petunjuk:<br />- Tujuan utama dari permainan ini adalah untuk mencapai Level 10 dan menyelesaikannya.<br/>
+- Pada setiap level, Anda harus membuka kotak yang benar untuk melanjutkan ke level berikutnya.</p>
+                  <button class="btn btn-outline-success" id="ya-hfj">Ya</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card col-sm-6">
+        <h5 class="card-header">SinglePlayer</h5>
+        <div class="card-body">
+          <h5 class="card-title">Mind Bender</h5>
+          <img src="mind.jpg" class="img-thumbnail" alt="...">
+          <p class="card-text">Tebak angka yang benar hanya dengan 5 kesempatan.</p>
+          <button class="btn btn-outline-success" onclick="showModal('Mind Bender')">Main</button>
+          <div id="modal-mind-bender" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-center" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Mind Bender</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Petunjuk:</br>- Pemain harus memasukkan angka tebakan mereka di dalam kotak input yang disediakan. <br />
+- Angka tebakan harus berada dalam rentang 1 hingga 50.</p>
+                  <button class="btn btn-outline-success" id="ya-mb">Ya</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card col-sm-6">
+        <h5 class="card-header">SinglePlayer</h5>
+        <div class="card-body">
+          <h5 class="card-title">Trinity Hands</h5>
+          <img src="trinity.jpg" class="img-thumbnail" alt="...">
+          <p class="card-text">Permainan suit batu gunting kertas.</p>
+          <button class="btn btn-outline-success" onclick="showModal('Trinity Hands')">Main</button>
+          <div id="modal-trinity-hands" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-center" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Trinity Hands</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Petunjuk:<br />- Memilih salah satu dari tiga pilihan: gunting, batu, atau kertas.<br />
+- Berusaha untuk mengalahkan komputer dengan memilih pilihan yang dapat mengalahkan pilihan komputer.</p>
+                  <button class="btn btn-outline-success" id="ya-th">Ya</button>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card col-sm-6">
+        <h5 class="card-header">MultiPlayer</h5>
+        <div class="card-body">
+          <h5 class="card-title">XO Showdown</h5>
+          <img src="xo.jpg" class="img-thumbnail" alt="...">
+          <p class="card-text">Bermain XOX / tic tac toe bersama temanmu.</p>
+          <button class="btn btn-outline-success" onclick="showModal('XO Showdown')">Main</button>
+          <div id="modal-xo-showdown" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-center" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">XO Showdown</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Petunjuk:<br />- Memenangkan permainan dengan menempatkan tiga simbol ("X" atau "O") secara berurutan dalam baris, kolom, atau diagonal.<br />
+- Permainan ini dimainkan oleh dua pemain, "X" dan "O", bergantian menempatkan simbol mereka di kotak-kotak pada papan permainan.</p>
+                  <button class="btn btn-outline-success" id="ya-xs">Ya</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--content-->
+
+</div>
+</div>
+<!--pembungkus carousel dan content-->
+
+<!--<nav class="navbar sticky-bottom bg-body-tertiary">-->
+<!--  <div class="container-fluid">-->
+<!--    <a class="navbar-brand" href="#">Sticky bottom</a>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script>
+  function showModal(game) {
+    const modalId = "modal-" + game.toLowerCase().replace(/\s/g, "-");
+    const modal = document.getElementById(modalId);
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+  }
+  
+  document.getElementById("ya-hfj").addEventListener("click", function() {
+  window.location.href = "huntforjade.html";
+});
+
+  document.getElementById("ya-mb").addEventListener("click", function() {
+  window.location.href = "mindbender.html";
+});
+
+  document.getElementById("ya-th").addEventListener("click", function() {
+  window.location.href = "trinityhands.html";
+});
+
+  document.getElementById("ya-xs").addEventListener("click", function() {
+  window.location.href = "xoshowdown.html";
+});
+</script>
+</body>
+</html>
